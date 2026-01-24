@@ -23,7 +23,7 @@ class GameRunner {
             playing = askPlayAgain();
         }
 
-        System.out.println("Thank you for playing Match-3 Falling Bricks Game!");
+        System.out.println("Thank you for playing Match-3!");
     }
 
     private void playGame() {
@@ -48,7 +48,7 @@ class GameRunner {
     }
 
     private GameState initializeGame() {
-        System.out.println("Please enter init string (e.g., 5 8 H^^* V*@^):");
+        System.out.println("Please enter field size(width and height) and upto 5 bricks set(5 8 H^^* V*@^):");
         String line = scanner.nextLine().trim();
         if (line.isEmpty()) return null;
 
@@ -58,8 +58,8 @@ class GameRunner {
             return null;
         }
 
-        int width = 10;
-        int height = 20;
+        int width = 5;
+        int height = 8;
         Queue<Brick> bricks = new LinkedList<>();
 
         try {
