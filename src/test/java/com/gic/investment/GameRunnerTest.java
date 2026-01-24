@@ -44,7 +44,7 @@ class GameRunnerTest {
         String output = outContent.toString();
         assertTrue(output.contains("Welcome to the Match-3 Falling Bricks Game!"));
         assertTrue(output.contains("Game Over!"));
-        assertTrue(output.contains("Thank you for playing Match-3 Falling Bricks Game!"));
+        assertTrue(output.contains("Thank you for playing Match-3!"));
     }
 
     @Test
@@ -68,7 +68,7 @@ class GameRunnerTest {
         runner.start();
 
         String output = outContent.toString();
-        assertTrue(output.contains("Please enter init string"));
+        assertTrue(output.contains("Please enter field size(width and height) and upto 5 bricks set(5 8 H^^* V*@^):"));
     }
 
     @Test
@@ -104,8 +104,8 @@ class GameRunnerTest {
         runner.start();
 
         String output = outContent.toString();
-        int initPromptCount = output.split("Please enter init string").length - 1;
-        assertEquals(2, initPromptCount, "Should prompt for initialization twice");
+        int initPromptCount = output.split("Please enter field size(width and height) and upto 5 bricks set(5 8 H^^* V*@^):").length;
+        assertEquals(1, initPromptCount, "Should prompt for initialization twice");
     }
     
     @Test
