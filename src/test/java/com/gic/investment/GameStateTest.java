@@ -100,10 +100,6 @@ class GameStateTest {
         Queue<Brick> bricks = new LinkedList<>();
         Brick brick = new Brick(Orientation.HORIZONTAL, List.of('A', 'B', 'C'), new Position(19, 0));
         bricks.add(brick);
-        
-        // Manually set up state with brick at bottom
-        // Since we can't easily inject active brick into private constructor, 
-        // we simulate by spawning and dropping
         GameState state = new GameState(field, bricks).spawnNextBrick();
         state = state.processCommand('D'); // At 19,0
         
@@ -111,5 +107,66 @@ class GameStateTest {
         
         assertTrue(placedState.getActiveBrick().isEmpty());
         assertTrue(placedState.getField().isOccupied(new Position(19, 0)));
+    }
+
+    @Test
+    void testProcessCommandNoActiveBrick() {
+        Field field = new Field(10, 20);
+        Queue<Brick> bricks = new LinkedList<>();
+        GameState state = new GameState(field, bricks);
+        
+        GameState sameState = state.processCommand('L');
+        assertEquals(state, sameState);
+    }
+
+    @Test
+    void testProcessCommandInvalidMove() {
+        Field field = new Field(10, 20);
+        Queue<Brick> bricks = new LinkedList<>();
+        Brick brick = new Brick(Orientation.HORIZONTAL, List.of('A', 'B', 'C'), new Position(0, 0));
+        bricks.add(brick);
+        
+        GameState state = new GameState(field, bricks).spawnNextBrick();
+
+        GameState sameState = state.processCommand('L');
+        assertEquals(new Position(0, 0), sameState.getActiveBrick().get().getPosition());
+    }
+
+    @Test
+    void testProcessCommandUnknown() {
+        Field field = new Field(10, 20);
+        Queue<Brick> bricks = new LinkedList<>();
+        Brick brick = new Brick(Orientation.HORIZONTAL, List.of('A', 'B', 'C'), new Position(5, 5));
+        bricks.add(brick);
+        
+        GameState state = new GameState(field, bricks).spawnNextBrick();
+        
+        GameState sameState = state.processCommand('X');
+        assertEquals(new Position(5, 5), sameState.getActiveBrick().get().getPosition());
+    }
+
+    @Test
+    void testMoveDownOrPlaceNoActiveBrick() {
+        Field field = new Field(10, 20);
+        Queue<Brick> bricks = new LinkedList<>();
+        GameState state = new GameState(field, bricks);
+        
+        GameState sameState = state.moveDownOrPlace();
+        assertEquals(state, sameState);
+    }
+    
+    @Test
+    void testNeedsNewBrick() {
+        Field field = new Field(10, 20);
+        Queue<Brick> bricks = new LinkedList<>();
+        GameState state = new GameState(field, bricks);
+
+        bricks.add(new Brick(Orientation.HORIZONTAL, List.of('A', 'B', 'C'), new Position(19, 0)));
+        state = state.spawnNextBrick();
+        state = state.processCommand('D');
+        state = state.moveDownOrPlace();
+        
+        assertFalse(state.needsNewBrick());
+        assertTrue(state.isGameOver());
     }
 }

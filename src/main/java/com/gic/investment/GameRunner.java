@@ -4,13 +4,13 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 // Game.java - Main game controller
-class Game {
+class GameRunner {
     private static final Set<Character> VALID_SYMBOLS = Set.of('~', '^', '*', '@');
     private static final Set<Character> VALID_COMMANDS = Set.of('L', 'R', 'D');
 
     private final Scanner scanner;
 
-    public Game() {
+    public GameRunner() {
         this.scanner = new Scanner(System.in);
     }
 
@@ -126,6 +126,6 @@ class Game {
     }
 
     public static void main(String[] args) {
-        new Game().start();
+        new GameRunner().start();
     }
 }

@@ -93,4 +93,18 @@ class FieldTest {
         Field sameField = fieldWithBrick.removeMatches();
         assertTrue(sameField.isOccupied(new Position(19, 0)));
     }
+
+    @Test
+    void testRender() {
+        Field field = new Field(4, 4);
+        Brick brick = new Brick(Orientation.HORIZONTAL, List.of('A', 'B', 'C'), new Position(0, 0));
+        
+        // Render with active brick
+        String output = field.render(Optional.of(brick));
+        assertTrue(output.contains("ABC "));
+        
+        // Render without active brick
+        output = field.render(Optional.empty());
+        assertFalse(output.contains("ABC"));
+    }
 }
