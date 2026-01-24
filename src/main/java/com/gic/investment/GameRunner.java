@@ -73,7 +73,14 @@ class GameRunner {
                 char orientChar = token.charAt(0);
                 String symbols = token.substring(1);
 
-                Orientation orientation = (orientChar == 'V' || orientChar == 'v') ? Orientation.VERTICAL : Orientation.HORIZONTAL;
+                Optional<Orientation> orientation = switch (orientChar) {
+                    case 'H', 'h' -> Optional.of(Orientation.HORIZONTAL);
+                    case 'V', 'v' -> Optional.of(Orientation.VERTICAL);
+                    default -> {
+                        System.out.println("Invalid orientation");
+                        yield Optional.empty();
+                    }
+                };
                 
                 List<Character> symbolList = symbols.chars()
                         .mapToObj(c -> (char) c)
@@ -81,12 +88,12 @@ class GameRunner {
                         .collect(Collectors.toList());
 
                 if (symbolList.size() != 3) continue;
-
-                Position startPos = orientation == Orientation.HORIZONTAL ?
+                if(orientation.isEmpty()) continue;
+                Position startPos = orientation.get() == Orientation.HORIZONTAL ?
                         new Position(0, (width - 3) / 2) :
                         new Position(0, width / 2);
 
-                bricks.add(new Brick(orientation, symbolList, startPos));
+                bricks.add(new Brick(orientation.get(), symbolList, startPos));
             }
         } catch (Exception e) {
             System.out.println("Error parsing input: " + e.getMessage());
