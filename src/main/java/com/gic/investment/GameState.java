@@ -75,7 +75,6 @@ class GameState {
             return new GameState(field, brickQueue, Optional.of(movedDown), gameOver);
         }
 
-        // Place brick and check for matches
         Field newField = field.placeBrick(current).removeMatches();
         return new GameState(newField, brickQueue, Optional.empty(), gameOver);
     }
