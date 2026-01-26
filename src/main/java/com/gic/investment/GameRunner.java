@@ -2,9 +2,9 @@ package com.gic.investment;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import static com.gic.investment.GameConstants.INIT_MSG;
-import static com.gic.investment.GameConstants.INVALID_BRICK_SIZE_MSG;
+import static com.gic.investment.GameConstants.*;
 
 // GameRunner.java - Main game controller
 class GameRunner {
@@ -39,7 +39,7 @@ class GameRunner {
             displayGame(state);
 
             List<Character> commands = getCommands();
-            if(commands.size()== 0) continue;
+           // if(commands.size()== 0) continue;
             state = processCommands(state, commands);
             state = state.moveDownOrPlace();
 
@@ -58,8 +58,22 @@ class GameRunner {
 
         String[] parts = line.split("\\s+");
         if (parts.length < 2 || parts.length > 7) {
-            System.out.println(INVALID_BRICK_SIZE_MSG);
+            System.out.println(INVALID_FIELD_OR_BRICK_SIZE_MSG);
             return null;
+        } else if (!Stream.of(parts)
+                .limit(2)
+                .allMatch(s -> {
+                    try {
+                        Integer.parseInt(s);
+                        return true;
+                    } catch (NumberFormatException e) {
+                        return false;
+                    }
+                })) {
+
+                 System.out.println(INVALID_FIELD_OR_BRICK_SIZE_MSG); {
+                 return null;
+            }
         }
 
         int width = 5;

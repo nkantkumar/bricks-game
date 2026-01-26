@@ -11,5 +11,5 @@ public final class GameConstants {
             Allowed symbols: '~','^','*','@'.
             Up to 5 bricks can be provided.
             """;
-    public static final String INVALID_BRICK_SIZE_MSG ="Invalid input! Check input parameter like field size and brick of the game.Either no brick or more than 5 bricks has been provided";
+    public static final String INVALID_FIELD_OR_BRICK_SIZE_MSG ="Invalid input! Check input parameter like field size and brick params of the game.Either no brick or more than 5 bricks has been provided";
 }

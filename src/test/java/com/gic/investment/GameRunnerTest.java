@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 
 import static com.gic.investment.GameConstants.INIT_MSG;
+import static com.gic.investment.GameConstants.INVALID_FIELD_OR_BRICK_SIZE_MSG;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameRunnerTest {
@@ -93,7 +94,7 @@ class GameRunnerTest {
         runner.start();
 
         String output = outContent.toString();
-        assertTrue(output.contains("Error parsing input"));
+        assertTrue(output.contains(INVALID_FIELD_OR_BRICK_SIZE_MSG));
     }
 
     @Test
