@@ -36,6 +36,7 @@ class GameRunner {
             displayGame(state);
 
             List<Character> commands = getCommands();
+            if(commands.size()== 0) continue;
             state = processCommands(state, commands);
             state = state.moveDownOrPlace();
 
@@ -48,7 +49,7 @@ class GameRunner {
     }
 
     private GameState initializeGame() {
-        System.out.println("Please enter field size(width and height) and upto 5 bricks set(5 8 H^^* V*@^):");
+        System.out.println("Please enter field size(width and height) and upto 5 bricks set(example: 5 8 H^^* V*@^):");
         String line = scanner.nextLine().trim();
         if (line.isEmpty()) return null;
 

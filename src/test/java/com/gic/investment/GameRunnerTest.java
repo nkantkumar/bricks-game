@@ -68,7 +68,7 @@ class GameRunnerTest {
         runner.start();
 
         String output = outContent.toString();
-        assertTrue(output.contains("Please enter field size(width and height) and upto 5 bricks set(5 8 H^^* V*@^):"));
+        assertTrue(output.contains("Please enter field size(width and height) and upto 5 bricks set(example: 5 8 H^^* V*@^):"));
     }
 
     @Test
@@ -104,7 +104,7 @@ class GameRunnerTest {
         runner.start();
 
         String output = outContent.toString();
-        int initPromptCount = output.split("Please enter field size(width and height) and upto 5 bricks set(5 8 H^^* V*@^):").length;
+        int initPromptCount = output.split("Please enter field size(width and height) and upto 5 bricks set(example: 5 8 H^^* V*@^):").length;
         assertEquals(1, initPromptCount, "Should prompt for initialization twice");
     }
     

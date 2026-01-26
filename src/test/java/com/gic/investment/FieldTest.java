@@ -101,7 +101,7 @@ class FieldTest {
         
         // Render with active brick
         String output = field.render(Optional.of(brick));
-        assertTrue(output.contains("ABC "));
+        assertTrue(output.contains("ABC."));
         
         // Render without active brick
         output = field.render(Optional.empty());
