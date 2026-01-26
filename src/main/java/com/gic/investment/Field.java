@@ -93,18 +93,15 @@ class Field {
         );
 
         StringBuilder sb = new StringBuilder();
-        sb.append("+" + "-".repeat(width) + "+\n");
 
         for (int row = 0; row < height; row++) {
             sb.append("|");
             for (int col = 0; col < width; col++) {
                 Position pos = new Position(row, col);
-                sb.append(display.getOrDefault(pos, ' '));
+                sb.append(display.getOrDefault(pos, '.'));
             }
             sb.append("|\n");
         }
-
-        sb.append("+" + "-".repeat(width) + "+");
         return sb.toString();
     }
 
