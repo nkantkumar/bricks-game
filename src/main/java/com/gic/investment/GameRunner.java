@@ -3,7 +3,10 @@ package com.gic.investment;
 import java.util.*;
 import java.util.stream.Collectors;
 
-// Game.java - Main game controller
+import static com.gic.investment.GameConstants.INIT_MSG;
+import static com.gic.investment.GameConstants.INVALID_BRICK_SIZE_MSG;
+
+// GameRunner.java - Main game controller
 class GameRunner {
     private static final Set<Character> VALID_SYMBOLS = Set.of('~', '^', '*', '@');
     private static final Set<Character> VALID_COMMANDS = Set.of('L', 'R', 'D');
@@ -49,13 +52,13 @@ class GameRunner {
     }
 
     private GameState initializeGame() {
-        System.out.println("Please enter field size(width and height) and upto 5 bricks set(example: 5 8 H^^* V*@^):");
+        System.out.println(INIT_MSG);
         String line = scanner.nextLine().trim();
         if (line.isEmpty()) return null;
 
         String[] parts = line.split("\\s+");
-        if (parts.length < 2) {
-            System.out.println("Invalid input.");
+        if (parts.length < 2 || parts.length > 7) {
+            System.out.println(INVALID_BRICK_SIZE_MSG);
             return null;
         }
 

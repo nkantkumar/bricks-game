@@ -43,7 +43,6 @@ class FieldTest {
     void testCannotPlaceBrickOutOfBounds() {
         Field field = new Field(10, 20);
         Brick brick = new Brick(Orientation.HORIZONTAL, List.of('A', 'B', 'C'), new Position(0, 8));
-        // Occupies (0,8), (0,9), (0,10) -> (0,10) is out of bounds
         assertFalse(field.canPlaceBrick(brick));
     }
 
@@ -54,14 +53,12 @@ class FieldTest {
         Field fieldWithBrick = field.placeBrick(brick1);
         
         Brick brick2 = new Brick(Orientation.VERTICAL, List.of('X', 'Y', 'Z'), new Position(4, 5));
-        // Occupies (4,5), (5,5), (6,5) -> (5,5) is occupied
         assertFalse(fieldWithBrick.canPlaceBrick(brick2));
     }
 
     @Test
     void testRemoveMatchesHorizontal() {
         Field field = new Field(10, 20);
-        // Create A A A horizontally
         Brick brick = new Brick(Orientation.HORIZONTAL, List.of('A', 'A', 'A'), new Position(19, 0));
         Field fieldWithMatch = field.placeBrick(brick);
         
@@ -74,7 +71,6 @@ class FieldTest {
     @Test
     void testRemoveMatchesVertical() {
         Field field = new Field(10, 20);
-        // Create B B B vertically
         Brick brick = new Brick(Orientation.VERTICAL, List.of('B', 'B', 'B'), new Position(17, 0));
         Field fieldWithMatch = field.placeBrick(brick);
         
@@ -98,12 +94,10 @@ class FieldTest {
     void testRender() {
         Field field = new Field(4, 4);
         Brick brick = new Brick(Orientation.HORIZONTAL, List.of('A', 'B', 'C'), new Position(0, 0));
-        
-        // Render with active brick
+
         String output = field.render(Optional.of(brick));
         assertTrue(output.contains("ABC."));
-        
-        // Render without active brick
+
         output = field.render(Optional.empty());
         assertFalse(output.contains("ABC"));
     }
