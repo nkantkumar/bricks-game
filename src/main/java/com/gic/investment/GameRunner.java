@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 import static com.gic.investment.GameConstants.*;
 
 // GameRunner.java - Main game controller
-class GameRunner {
+public class GameRunner {
     private static final Set<Character> VALID_SYMBOLS = Set.of('~', '^', '*', '@');
     private static final Set<Character> VALID_COMMANDS = Set.of('L', 'R', 'D');
 
