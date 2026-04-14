@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: bricks-game
+  kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/payment}
+    username: ${SPRING_DATASOURCE_USERNAME:payment}
+    password: ${SPRING_DATASOURCE_PASSWORD:payment}
+
+fraud:
+  client:
+    base-url: ${FRAUD_CLIENT_BASE_URL:http://localhost:8089}
+    connect-timeout-ms: 2000
+    read-timeout-ms: 2000
